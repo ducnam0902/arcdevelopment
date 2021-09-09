@@ -246,7 +246,7 @@ const Header = (props) => {
         component={Link}
         to="/estimate"
         className={classes.button}
-        
+        onClick={() =>props.setValue(5)}
       >
         Free Estimate
       </Button>

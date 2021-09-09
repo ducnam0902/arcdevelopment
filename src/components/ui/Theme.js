@@ -17,9 +17,6 @@ export default createTheme({
         }
     },
     typography: {
-        h3: {
-            fontWeight: 300
-        },
         tab: {
             fontFamily: 'Raleway',
             textTransform: 'none',
@@ -38,6 +35,12 @@ export default createTheme({
             fontSize: '2.5rem',
             color: `${arcBlue}`
         },
+        h3: {
+            fontFamily: 'Pacifico',
+            fontSize: '2.5rem',
+            color: `${arcBlue}`,
+            fontWeight: 300
+        },
         h4: {
             fontFamily: 'Raleway',
             fontSize: '1.75rem',
@@ -46,6 +49,11 @@ export default createTheme({
         },
         subtitle1: {
             color: `${arcGrey}`,
+            fontSize: '1.25rem',
+            fontWeight: 300
+        },
+        subtitle2: {
+            color: `white`,
             fontSize: '1.25rem',
             fontWeight: 300
         },
