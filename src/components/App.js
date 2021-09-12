@@ -6,6 +6,9 @@ import Footer from "./ui/Footer";
 import { useState } from "react";
 import LandingPage from "./ui/LandingPage";
 import Services from "./ui/Services";
+import CustomSoftware from "./ui/CustomSoftware";
+import MobileApps from "./ui/MobileApps";
+import Websites from "./ui/Websites";
 function App() {
   const [value, setValue] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -16,9 +19,9 @@ function App() {
         <Switch>
           <Route exact path="/" render={(props) => <LandingPage  {...props} setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
           <Route exact path="/services" component={(props) => <Services  {...props} setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
-          <Route exact path="/customsoftware" component={() => <div>Custom Software</div>}/>
-          <Route exact path="/mobileapps" component={() => <div>Mobile Apps</div>}/>
-          <Route exact path="/websites" component={() => <div>Websites</div>}/>
+          <Route exact path="/customsoftware" component={(props) => <CustomSoftware  {...props} setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
+          <Route exact path="/mobileapps" component={(props) => <MobileApps  {...props} setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
+          <Route exact path="/websites" component={(props) => <Websites  {...props} setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
           <Route exact path="/revolution" component={() => <div>Revolution</div>}/>
           <Route exact path="/about" component={() => <div>About</div>}/>
           <Route exact path="/contact" component={() => <div>Contact</div>}/>
