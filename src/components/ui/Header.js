@@ -258,7 +258,7 @@ const Header = (props) => {
         open={openMenu}
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }}
-        style={{zIndex: 1561}}
+        style={{zIndex: 2000}}
       >
         {menuOptions.map((option, i) => (
           <MenuItem
