@@ -15,7 +15,7 @@ import analytics from "../../assets/analytics.svg";
 import seo from "../../assets/seo.svg";
 import outreach from "../../assets/outreach.svg";
 import ecommerce from "../../assets/ecommerce.svg";
-
+import CallToAction from '../ui/CallToAction';
 const useStyles = makeStyles((theme) => ({
   heading: {
     maxWidth: "40em",
@@ -40,6 +40,7 @@ const Websites = (props) => {
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Grid container direction="column">
@@ -114,14 +115,15 @@ const Websites = (props) => {
       <Grid
         item
         container
-        direction="row"
+        direction={matchesSM ? "column" : "row"}
         alignItems="center"
         className={classes.rowContainer}
+        style={{ marginTop: "15em" }}
       >
         <Grid item>
           <Grid container direction="column">
             <Grid item>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h4" align={matchesSM ? 'center' : undefined}  gutterBottom>
                 Analytics
               </Typography>
             </Grid>
@@ -134,8 +136,8 @@ const Websites = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
-          <Typography variant="body1" className={classes.paragraphContainer}>
+        <Grid item className={classes.paragraphContainer}>
+          <Typography align={matchesSM ? 'center' : undefined} variant="body1">
             Knowledge is power, and data is 21st Century gold. Analyzing this
             data can reveal hidden patterns and trends in your business,
             empowering you to make smarter decisions with measurable effects.
@@ -145,10 +147,11 @@ const Websites = (props) => {
       <Grid
         item
         container
-        direction="row"
+        direction={matchesSM ? "column" : "row"}
         alignItems="center"
         className={classes.rowContainer}
         justifyContent="flex-end"
+        style={{ marginTop: "15em", marginBottom: "15em" }}
       >
         <Grid item>
           <Grid container direction="column">
@@ -162,19 +165,15 @@ const Websites = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item style={{ marginLeft: "1em" }}>
-          <Typography
-            variant="body1"
-            paragraph
-            className={classes.paragraphContainer}
-          >
+        <Grid
+          item
+          className={classes.paragraphContainer}
+          style={{ marginLeft: matchesSM ? 0 : "1em" }}
+        >
+          <Typography variant="body1" align={matchesSM ? 'center' : undefined} paragraph>
             It's no secret that people like to shop online
           </Typography>
-          <Typography
-            variant="body1"
-            paragraph
-            className={classes.paragraphContainer}
-          >
+          <Typography variant="body1" align={matchesSM ? 'center' : undefined} paragraph>
             In 2017 over $2.3 trillion was spent in e-commerce, and it's time
             for your slice of that pie.
           </Typography>
@@ -183,14 +182,14 @@ const Websites = (props) => {
       <Grid
         item
         container
-        direction="row"
+        direction={matchesSM ? "column" : "row"}
         alignItems="center"
         className={classes.rowContainer}
       >
         <Grid item>
           <Grid container direction="column">
             <Grid item>
-              <Typography variant="h4" gutterBottom>
+              <Typography align={matchesSM ? 'center' : undefined}  variant="h4" gutterBottom>
                 Outreach
               </Typography>
             </Grid>
@@ -199,8 +198,12 @@ const Websites = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item style={{ marginLeft: "1em" }}>
-          <Typography variant="body1" className={classes.paragraphContainer}>
+        <Grid
+          item
+          className={classes.paragraphContainer}
+          style={{ marginLeft: matchesSM ? 0 : "1em" }}
+        >
+          <Typography variant="body1" align={matchesSM ? 'center' : undefined}>
             Draw people in with a dazzling website. Showing off your products
             online is a great way to help customers decide what's right for them
             before visiting in person.
@@ -210,10 +213,11 @@ const Websites = (props) => {
       <Grid
         item
         container
-        direction="row"
+        direction={matchesSM ? "column" : "row"}
         alignItems="center"
         className={classes.rowContainer}
         justifyContent="flex-end"
+        style={{ marginTop: "15em", marginBottom: "15em" }}
       >
         <Grid item>
           <Grid container direction="column">
@@ -227,30 +231,25 @@ const Websites = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item style={{ marginLeft: "1em" }}>
-          <Typography
-            variant="body1"
-            paragraph
-            className={classes.paragraphContainer}
-          >
+        <Grid
+          item
+          className={classes.paragraphContainer}
+          style={{ marginLeft: matchesSM ? 0 :"1em" }}
+        >
+          <Typography variant="body1" align={matchesSM ? 'center' : undefined} paragraph>
             How often have you ever been to the second page of Google results?
           </Typography>
-          <Typography
-            variant="body1"
-            paragraph
-            className={classes.paragraphContainer}
-          >
+          <Typography variant="body1" align={matchesSM ? 'center' : undefined} paragraph>
             If you're like us, probably never.
           </Typography>
-          <Typography
-            variant="body1"
-            paragraph
-            className={classes.paragraphContainer}
-          >
+          <Typography variant="body1" align={matchesSM ? 'center' : undefined} paragraph>
             Customers don't go there either, so we make sure your website is
             designedto end up on top.
           </Typography>
         </Grid>
+      </Grid>
+      <Grid item>
+        <CallToAction setValue={props.setValue}/>
       </Grid>
     </Grid>
   );
