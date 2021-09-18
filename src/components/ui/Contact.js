@@ -10,9 +10,11 @@ import {
   TextField,
   Dialog,
   DialogContent,
+  CircularProgress,
+  Snackbar,
 } from "@material-ui/core";
 import ButtonArrow from "./ButtonArrow";
-
+// import axios from "axios";
 import background from "../../assets/background.jpg";
 import mobileBackground from "../../assets/mobileBackground.jpg";
 import phoneIcon from "../../assets/phone.svg";
@@ -72,10 +74,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.light,
     },
-    [theme.breakpoints.down('sm')]:{
+    [theme.breakpoints.down("sm")]: {
       height: 40,
-      width: 225
-    }
+      width: 225,
+    },
   },
 }));
 
@@ -86,15 +88,21 @@ const Contact = (props) => {
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [emailHelper, setEmailHelper] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneHelper, setPhoneHelper] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
+
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
   const onChange = (event) => {
     let valid;
     switch (event.target.id) {
@@ -122,6 +130,51 @@ const Contact = (props) => {
         break;
     }
   };
+  const onConfirm = () => {
+    setLoading(true);
+    // axios
+    //   .get(, {params: {
+    //   name: name,
+    //   email: email,
+    //   phone: phone,
+    //   message: message
+    // }})
+    //   .then((res) => {
+    // setLoading(false);
+    // setOpen(false);
+    // setName("");
+    // setEmail("");
+    // setPhone("");
+    // setMessage("");
+    // setAlert({open: true, message: 'Something went wrong, please try again!', backgroundColor: '#FF3232'});
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setOpen(false);
+    // setAlert({open: true, message: 'Message sent successfully!', backgroundColor: '#4BB543'});
+    //   });
+    setTimeout(() => {
+      setLoading(false);
+      setAlert({
+        ...alert,
+        open: true,
+        message: "Message sent successfully!",
+        backgroundColor: "#4BB543",
+      });
+      setOpen(false);
+
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+    }, 2000);
+  };
+  const buttonContents = (
+    <React.Fragment>
+      Send Message{" "}
+      <img src={airplane} alt="paper airplane" style={{ marginLeft: "1em" }} />
+    </React.Fragment>
+  );
   return (
     <Grid container direction="row">
       <Grid
@@ -267,12 +320,7 @@ const Contact = (props) => {
                 className={classes.sendButton}
                 onClick={() => setOpen(true)}
               >
-                Send Message{" "}
-                <img
-                  src={airplane}
-                  alt="paper airplane"
-                  style={{ marginLeft: "1em" }}
-                />
+                {buttonContents}
               </Button>
             </Grid>
           </Grid>
@@ -285,8 +333,8 @@ const Contact = (props) => {
         fullScreen={matchesXS}
         PaperProps={{
           style: {
-            paddingLeft: matchesMD ? 0 :"10em",
-            paddingRight: matchesMD ? 0 :"10em",
+            paddingLeft: matchesMD ? 0 : "10em",
+            paddingRight: matchesMD ? 0 : "10em",
           },
         }}
       >
@@ -328,7 +376,7 @@ const Contact = (props) => {
                   onChange={onChange}
                 />
               </Grid>
-              <Grid item style={{ maxWidth: matchesXS ? '100%' :"20em" }}>
+              <Grid item style={{ maxWidth: matchesXS ? "100%" : "20em" }}>
                 <TextField
                   id="message"
                   multiline
@@ -337,7 +385,7 @@ const Contact = (props) => {
                   value={message}
                   InputProps={{ disableUnderline: true }}
                   onChange={(event) => setMessage(event.target.value)}
-                  style={{marginTop: '1em'}}
+                  style={{ marginTop: "1em" }}
                 />
               </Grid>
               <Grid
@@ -345,7 +393,7 @@ const Contact = (props) => {
                 container
                 style={{ marginTop: "2em" }}
                 alignItems="center"
-                direction={matchesSM ? 'column' : 'row'}
+                direction={matchesSM ? "column" : "row"}
               >
                 <Grid item>
                   <Button
@@ -360,14 +408,9 @@ const Contact = (props) => {
                   <Button
                     variant="contained"
                     className={classes.sendButton}
-                    onClick={() => setOpen(true)}
+                    onClick={onConfirm}
                   >
-                    Send Message{" "}
-                    <img
-                      src={airplane}
-                      alt="paper airplane"
-                      style={{ marginLeft: "1em" }}
-                    />
+                    {loading ? <CircularProgress size={30} /> : buttonContents}
                   </Button>
                 </Grid>
               </Grid>
@@ -375,6 +418,15 @@ const Contact = (props) => {
           </Grid>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{ backgroundColor: alert.backgroundColor, zIndex: 2500 }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+        key={"top center"}
+      />
       <Grid
         item
         container
